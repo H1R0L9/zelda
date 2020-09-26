@@ -3,6 +3,7 @@ from os import path
 from settings import *
 from sprites import *
 from tilemap import *
+import sys
 
 class Game:
     def __init__(self):
@@ -32,7 +33,15 @@ class Game:
         self.player_attack_down = []
 
         self.boss_idle = []
-        
+        self.boss_walk = []
+        self.boss_axe_attack = []
+        self.boss_spin_attack = []
+        self.boss_death = []
+        self.bat = []
+        self.ghost = []
+        self.frog = []
+        self.skeleton = []
+
         for i in range(len(PLAYER_WALK_UP)):
             player_walk_up = pg.image.load(path.join(img_folder, PLAYER_WALK_UP[i])).convert()
             player_walk_up.set_colorkey((0,64,64))
@@ -115,7 +124,7 @@ class Game:
         if self.draw_debug:
             for wall in self.walls:
                 pg.draw.rect(self.screen, CYAN, self.camera.apply_rect(wall.rect), 1)
-        
+
         pg.display.flip()
 
     # def draw_text(self, text, font_name, size, color, x, y, align="nw"):
@@ -179,7 +188,7 @@ class Game:
         # pg.display.flip()
         # self.wait_for_key()
         pass
-    
+
     def maploading(self, mapname):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, 'images')
@@ -201,20 +210,12 @@ class Game:
                 Stair(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == 'boss':
                 Boss(self, tile_object.x, tile_object.y)
-    
+
     def enemyloading(self, type):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, 'images')
         map_folder = path.join(game_folder, 'maps')
-        self.boss_idle = []
-        self.boss_walk = []
-        self.boss_axe_attack = []
-        self.boss_spin_attack = []
-        self.boss_death = []
-        self.bat = []
-        self.ghost = []
-        self.frog = []
-        self.skeleton = []
+
         if type == 'BOSS_IDLE':
             for i in range(len(BOSS_IDLE)):
                 enemies = pg.image.load(path.join(img_folder, BOSS_IDLE[i])).convert()

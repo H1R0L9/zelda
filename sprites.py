@@ -178,7 +178,7 @@ class Player(pg.sprite.Sprite):
             #         #     self.frame_index = 0
             #         self.image = self.game.player_idle_down
             #         self.state = 'idle'
-                    
+
             self.t_ref = pg.time.get_ticks()
 
 class Obstacle(pg.sprite.Sprite):
@@ -212,8 +212,8 @@ class Boss(pg.sprite.Sprite):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        print('game.boss_idle: ', boss_idle)
-        self.image = game.boss_idle[0]
+        print('game.boss_idle: ', self.game.boss_idle)
+        self.image = self.game.boss_idle[0]
         self.rect = self.image.get_rect()
         self.rect.center = (x, y) # avoid bug when adding walls on edges
         self.hit_rect = BOSS_HIT_RECT
@@ -225,7 +225,7 @@ class Boss(pg.sprite.Sprite):
         self.direction = 'left'
         self.t_ref = 0
         self.frame_index = 0
-    
+
     def update(self):
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
@@ -271,7 +271,7 @@ class Boss(pg.sprite.Sprite):
                 if self.direction == 'left':
                     print('self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.boss_idle)-1:
-                        self.image = pg.transform.flip(self.game.boss_idle, True, False)
+                        self.image = pg.transform.flip(self.game.boss_idle[self.frame_index], True, False)
                         self.frame_index = 0
                     else:
                         self.frame_index += 1
@@ -279,10 +279,10 @@ class Boss(pg.sprite.Sprite):
                 elif self.direction == 'right':
                     print('self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.boss_idle)-1:
-                        self.image = self.game.boss_idle
+                        self.image = self.game.boss_idle[self.frame_index]
                         self.frame_index = 0
                     else:
                         self.frame_index += 1
                         self.image = self.game.boss_idle[self.frame_index]
-                    
+
             self.t_ref = pg.time.get_ticks()
