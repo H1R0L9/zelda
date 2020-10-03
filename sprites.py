@@ -110,16 +110,9 @@ class Player(pg.sprite.Sprite):
                 self.image = self.game.player_walk_down[self.frame_index]
                 self.direction = 'down'
 
-            # if self.state == 'idle':
-            #     self.frame_index += 1
-            #     if self.frame_index >= len(self.game.player_img_idle):
-            #         self.frame_index = 0
-            #     self.image = self.game.player_img_idle[self.frame_index]
-            #     if self.direction == 'left':
-            #         self.image = pg.transform.flip(self.image, True, False)
             if self.state == 'attack':
                 if self.direction == 'left':
-                    print('self.frame_index: ', self.frame_index)
+                    #print('self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.player_attack_right)-1:
                         self.image = pg.transform.flip(self.game.player_idle_right, True, False)
                         self.state = 'idle'
@@ -128,7 +121,7 @@ class Player(pg.sprite.Sprite):
                         self.frame_index += 1
                         self.image = pg.transform.flip(self.game.player_attack_right[self.frame_index], True, False)
                 elif self.direction == 'right':
-                    print('self.frame_index: ', self.frame_index)
+                    #print('self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.player_attack_right)-1:
                         self.image = self.game.player_idle_right
                         self.state = 'idle'
@@ -137,7 +130,7 @@ class Player(pg.sprite.Sprite):
                         self.frame_index += 1
                         self.image = self.game.player_attack_right[self.frame_index]
                 elif self.direction == 'up':
-                    print('self.frame_index: ', self.frame_index)
+                    #print('self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.player_attack_up)-1:
                         self.image = self.game.player_idle_up
                         self.state = 'idle'
@@ -146,7 +139,7 @@ class Player(pg.sprite.Sprite):
                         self.frame_index += 1
                         self.image = self.game.player_attack_up[self.frame_index]
                 elif self.direction == 'down':
-                    print('self.frame_index: ', self.frame_index)
+                    #print('self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.player_attack_down)-1:
                         self.image = self.game.player_idle_down
                         self.state = 'idle'
@@ -269,15 +262,16 @@ class Boss(pg.sprite.Sprite):
 
             if self.state == 'idle':
                 if self.direction == 'left':
-                    print('self.frame_index: ', self.frame_index)
+                    print(self.game.boss_idle)
+                    print('boss idle left self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.boss_idle)-1:
-                        self.image = pg.transform.flip(self.game.boss_idle[self.frame_index], True, False)
                         self.frame_index = 0
                     else:
                         self.frame_index += 1
-                        self.image = pg.transform.flip(self.game.boss_idle[self.frame_index], True, False)
+                    self.image = pg.transform.flip(self.game.boss_idle[self.frame_index], True, False)
                 elif self.direction == 'right':
-                    print('self.frame_index: ', self.frame_index)
+                    print(self.game.boss_idle)
+                    print('boss idle right self.frame_index: ', self.frame_index)
                     if self.frame_index == len(self.game.boss_idle)-1:
                         self.image = self.game.boss_idle[self.frame_index]
                         self.frame_index = 0
@@ -286,3 +280,4 @@ class Boss(pg.sprite.Sprite):
                         self.image = self.game.boss_idle[self.frame_index]
 
             self.t_ref = pg.time.get_ticks()
+            print(deltaTime)
